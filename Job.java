@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lokerus;
+package com.mycompany.lokerus2;
 
 /**
  *
@@ -11,31 +11,40 @@ package lokerus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Job {
-    public String jobName;
-    public String description;
-    private List<String> applicants;
+class Job {
+   private String jobId;
+   private String jobTitle;
+   private int jobQuota;
+   private boolean accepted;
 
-    public Job(String jobName, String description) {
-        this.jobName = jobName;
-        this.description = description;
-    }
+   public Job(String jobId, String jobTitle, int jobQuota) {
+      this.jobId = jobId;
+      this.jobTitle = jobTitle;
+      this.jobQuota = jobQuota;
+      this.accepted = false;
+   }
 
-    public String getJobName() {
-        return jobName;
-    }
+   public String getJobId() {
+      return this.jobId;
+   }
 
-    public String getDescription() {
-        return description;
-    }
+   public String getJobTitle() {
+      return this.jobTitle;
+   }
 
-    public List<String> getApplicants() {
-        return applicants;
-    }
+   public int getJobQuota() {
+      return this.jobQuota;
+   }
 
-    @Override
-    public String toString() {
-        return jobName + ": " + description;
-    }
+   public boolean isAccepted() {
+      return this.accepted;
+   }
 
+   public void acceptJob() {
+      this.accepted = true;
+   }
+
+   public void decrementQuota() {
+      --this.jobQuota;
+   }
 }

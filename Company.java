@@ -2,36 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lokerus;
+package com.mycompany.lokerus2;
 
 /**
  *
  * @author Azhar Nurulhaifa
  */
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Company extends User {
-    private List<Job> jobList;
+class Company extends User {
+private final Map<String, Job> jobList = new HashMap();
 
-    public Company(String username, String password, String role) {
-        super(username, password, role);
-        this.jobList = new ArrayList<>();
-    }
+   public Company(String username, String password) {
+      super(username, password, "company");
+   }
 
-    public void addJob(Job job) {
-        jobList.add(job);
-    }
+   public Map<String, Job> getJobList() {
+      return this.jobList;
+   }
 
-    public List<Job> getJobList() {
-        return jobList;
-    }
+   public void addJob(String jobId, String jobTitle, int jobQuota) {
+      this.jobList.put(jobId, new Job(jobId, jobTitle, jobQuota));
+   }
 
-    public void viewApplicants(Job job) {
-        if (jobList.contains(job)) {
-            System.out.println("Applicants for " + job.getJobName() + ": " + job.getApplicants());
-        } else {
-            System.out.println("Job not found.");
-        }
-    }
+   public void acceptSelectedJob(String jobId) {
+      if (this.jobList.containsKey(jobId)) {
+         Job selectedJob = (Job)this.jobList.get(jobId);
+         selectedJob.acceptJob();
+         System.out.println("Job '" + selectedJob.getJobTitle() + "' accepted from customer!");
+      } else {
+         System.out.println("Invalid job ID");
+      }
+
+   }
 }
